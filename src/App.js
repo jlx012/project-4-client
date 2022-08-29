@@ -14,6 +14,7 @@ import SignOut from './components/auth/SignOut'
 import ChangePassword from './components/auth/ChangePassword'
 import MyoosicIndex from './components/Myoosic/MyoosicIndex'
 import CreatePlaylist from './components/Playlists/CreatePlaylist'
+import Playlists from './components/Playlists/Playlists'
 
 const App = () => {
 
@@ -171,6 +172,16 @@ const App = () => {
 						element={
 							<RequireAuth user={user}>
 								<CreatePlaylist msgAlert={msgAlert} user={user} />
+							</RequireAuth>
+						}
+					/>
+					<Route
+						path='/playlists'
+						element={
+							<RequireAuth user={user}>
+								<Playlists 
+									msgAlert={msgAlert} clearUser={clearUser} user={user} 
+								/>
 							</RequireAuth>
 						}
 					/>

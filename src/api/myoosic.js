@@ -6,6 +6,10 @@ export const getAllMusic = () => {
     return axios(`${apiUrl}/myoosic`)
 }
 
+export const getAllPlaylists = () => {
+    return axios(`${apiUrl}/playlists`)
+}
+
 export const createPlaylist = (user, newPlaylist) => {
     return axios({
         url: apiUrl + 'create-playist',
@@ -14,5 +18,5 @@ export const createPlaylist = (user, newPlaylist) => {
             Authorization: `Token token=${user.token}`,
         },
         data: {playlist: newPlaylist}
-})
+    })
 }
