@@ -13,6 +13,7 @@ import SignIn from './components/auth/SignIn'
 import SignOut from './components/auth/SignOut'
 import ChangePassword from './components/auth/ChangePassword'
 import MyoosicIndex from './components/Myoosic/MyoosicIndex'
+import CreatePlaylist from './components/Playlists/CreatePlaylist'
 
 const App = () => {
 
@@ -163,6 +164,14 @@ const App = () => {
 								handleFavoriteClick={handleFavoriteClick} favorites={ favorites } 
 								handleRemoveClick={handleRemoveClick}
 							/>							
+						}
+					/>
+					<Route
+						path='/createPlaylist'
+						element={
+							<RequireAuth user={user}>
+								<CreatePlaylist msgAlert={msgAlert} user={user} />
+							</RequireAuth>
 						}
 					/>
 				</Routes>
