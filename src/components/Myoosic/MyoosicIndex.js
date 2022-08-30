@@ -94,7 +94,7 @@ const MyoosicIndex = (props) => {
             // console.log('book id', book._id)
             // console.log('user id', user._id)
             // console.log('book user id', favorites[i].userId)
-            if(favorites[i].mbid === song.mbid && user._id === favorites[i].userId) {
+            if(favorites[i]._id === song._id && user._id === favorites[i].userId) {
                 return true
             }
         }

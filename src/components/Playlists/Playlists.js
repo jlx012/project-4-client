@@ -56,7 +56,7 @@ const PlaylistsIndex = (props) => {
         <Card style={{ width: '80%', height: '150px', margin: 5}} key={ playlist._id }>
             <Card.Body className='text-center'>
                 <Card.Title ><Link to={`/playlists/${playlist._id}`}>{ playlist.name }</Link></Card.Title>
-                <Card.Text display="flex-right">{ playlist.description }</Card.Text>
+                <Card.Text display="flex-right">{ playlist.description }</Card.Text>              
             </Card.Body>
         </Card>)
 })

@@ -16,11 +16,32 @@ export const createPlaylist = (user, newPlaylist) => {
     console.log('this is user', user)
     console.log('this is newPlaylist', newPlaylist)
     return axios({
-        url: apiUrl + 'create-playist',
+        url: apiUrl + '/create-playlist',
         method: 'POST',
         headers: {
             Authorization: `Token token=${user.token}`,
         },
-        data: {playlist: newPlaylist}
+        data: { playlist: newPlaylist }
     })
 }
+
+export const removeBook = (user, bookId) => {
+    return axios({
+        url: `${apiUrl}/books/${bookId}`,
+        method: 'DELETE',
+        headers: {
+            Authorization: `Token token=${user.token}`,
+        }
+    })
+}
+
+export const removePlaylist = (user, playlistId) => {
+    return axios({
+        url: `${apiUrl}/playlists/${playlistId}`,
+        method: 'DELETE',
+        headers: {
+            Authorization: `Token token=${user.token}`,
+        }
+    })
+}
+

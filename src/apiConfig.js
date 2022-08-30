@@ -2,7 +2,7 @@ let apiUrl
 const apiUrls = {
     // YOU MUST CHANGE PRODUCTION URL WHEN DEPLOYING
 	production: '<replace_with_deployed_api_url>',
-	development: 'http://localhost:8000',
+	development: 'http://127.0.0.1:8000',
 }
 
 if (window.location.hostname === 'localhost') {
