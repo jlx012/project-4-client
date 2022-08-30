@@ -33,17 +33,17 @@ https://github.com/jlx012/project-4-api
 * As a unregistered user, I want to be able to see the song club song
 
 ## Wireframes
-![StartPage](./images/startpage.jpg)
-![Login](./images/login.jpg)
-![Sign Up](./images/signup.jpg)
-![Index](./images/mainpage.jpg)
-![All Playlists](./images/playlistlist.jpg)
-![Show Playlist](./images/playlistshow.jpg)
-![Show Song](./images/songshow.jpg)
-![Favorites](./images/favorites.jpg)
+![StartPage](./public/images/startpage.jpg)
+![Login](./public/images/login.jpg)
+![Sign Up](./public/images/signup.jpg)
+![Index](./public/images/mainpage.jpg)
+![All Playlists](./public/images/playlistlist.jpg)
+![Show Playlist](./public/images/playlistshow.jpg)
+![Show Song](./public/images/songshow.jpg)
+![Favorites](./public/images/favorites.jpg)
 
 ## ERD
-![erds](./images/project4ERD.jpg)
+![erds](./public/images/project4ERD.jpg)
 
 ##### Stretch
 * As a registered user, I want to be able to like a song and remove my like

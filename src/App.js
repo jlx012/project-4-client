@@ -2,6 +2,7 @@
 import React, { useState, Fragment, useEffect } from 'react'
 import { Route, Routes } from 'react-router-dom'
 import { v4 as uuid } from 'uuid'
+import {withRouter} from 'react-router-dom'
 
 // import AuthenticatedRoute from './components/shared/AuthenticatedRoute'
 import AutoDismissAlert from './components/shared/AutoDismissAlert/AutoDismissAlert'
@@ -18,7 +19,7 @@ import Playlists from './components/Playlists/Playlists'
 import PlaylistShow from './components/Playlists/PlaylistShow'
 
 
-const App = () => {
+const App = ({ hideHeaderPaths = [] }) => {
 
   const [user, setUser] = useState(null)
   const [favorites, setFavorites] = useState([])
@@ -135,6 +136,7 @@ const App = () => {
 			<Fragment>
 				<Header user={user} />
 				<Routes>
+					{window.location.pathname !== "/" ? <Header user={user} /> : null}{" "}
 					<Route path='/' element={<Home msgAlert={msgAlert} user={user} />} />
 					<Route
 						path='/sign-up'
