@@ -10,6 +10,12 @@ export const getAllPlaylists = () => {
     return axios(`${apiUrl}/playlists`)
 }
 
+export const getOnePlaylist = (id) => {
+    console.log("here is the ID", id)
+    return axios(`${apiUrl}/playlists/${id}`)
+}
+
+// Create
 export const createPlaylist = (user, newPlaylist) => {
     console.log('createplaylist in api was hit')
 
@@ -25,16 +31,7 @@ export const createPlaylist = (user, newPlaylist) => {
     })
 }
 
-export const removeBook = (user, bookId) => {
-    return axios({
-        url: `${apiUrl}/books/${bookId}`,
-        method: 'DELETE',
-        headers: {
-            Authorization: `Token token=${user.token}`,
-        }
-    })
-}
-
+// Delete
 export const removePlaylist = (user, playlistId) => {
     return axios({
         url: `${apiUrl}/playlists/${playlistId}`,
@@ -45,3 +42,21 @@ export const removePlaylist = (user, playlistId) => {
     })
 }
 
+// UPDATE
+export const updatePlaylist = (user, updatedPlaylist) => {
+    // console.log('createPlaylist in api was hit')
+    // in our createPlaylist form, we're building an object
+    // when we pass that object into the api createPlaylist function,
+    // it's going to look like the playlists in our database
+    // we're going to refer to this as newPlaylist
+    // console.log('this is user', user)
+    console.log('this is updatedPlaylist', updatedPlaylist)
+	return axios({
+		url: `${apiUrl}/playlists/${updatedPlaylist._id}`,
+		method: 'PATCH',
+		headers: {
+			Authorization: `Token token=${user.token}`,
+		},
+		data: { playlist: updatedPlaylist }
+	})
+}

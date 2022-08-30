@@ -15,6 +15,7 @@ import ChangePassword from './components/auth/ChangePassword'
 import MyoosicIndex from './components/Myoosic/MyoosicIndex'
 import CreatePlaylist from './components/Playlists/CreatePlaylist'
 import Playlists from './components/Playlists/Playlists'
+import PlaylistShow from './components/Playlists/PlaylistShow'
 
 
 const App = () => {
@@ -182,6 +183,12 @@ const App = () => {
 							<Playlists 
 								msgAlert={msgAlert} clearUser={clearUser} user={user} 
 							/>
+						}
+					/>
+					<Route
+						path='/playlists/:id'
+						element={
+							<PlaylistShow msgAlert={msgAlert} clearUser={clearUser} user={user} />							
 						}
 					/>
 				</Routes>

@@ -35,51 +35,50 @@ const ShowPlaylist = (props) => {
     // destructuring to get the id value from our route parameters
 
     useEffect(() => {
-        getOneBook(id)
+        getOnePlaylist(id)
         // .then(res => console.log(res.data))
 
-            .then(res => setBook(res.data.book))
+            .then(res => setPlaylist(res.data.playlist))
             .catch(err => {                   
                 msgAlert({
-                    heading: 'Error getting book',
-                    message: messages.getBooksFailure,
+                    heading: 'Error getting playlist',
+                    message: messages.getPlaylistsFailure,
                     variant: 'danger'
                 })
-                navigate('/')
+                navigate('/playlists')
                 //navigate back to the home page if there's an error fetching
             })
     }, [updated])
-        console.log(book)
-    // here we'll declare a function that runs which will remove the book
+        console.log(playlist)
+    // here we'll declare a function that runs which will remove the playlist
     // this function's promise chain should send a message, and then go somewhere
-    const removeTheBook = () => {
-        removeBook(user, book._id)
+    const removeThePlaylist = () => {
+        removePlaylist(user, playlist._id)
             // on success send a success message
             .then(() => {
                 console.log('this is the user\n', user)
-                console.log('this is the bookId\n', book._id)
+                console.log('this is the playlistId\n', playlist._id)
 
                 msgAlert({
                     heading: 'Success',
-                    message: messages.removeBookSuccess,
+                    message: messages.removePlaylistSuccess,
                     variant: 'success'
                 })
             })
             // then navigate to index
-            .then(() => {navigate('/books')})
+            .then(() => {navigate('/playlists')})
             // on failure send a failure message
             .catch(err => {                   
                 msgAlert({
-                    heading: 'Error removing book',
-                    message: messages.removeBookFailure,
+                    heading: 'Error removing playlist',
+                    message: messages.removePlaylistFailure,
                     variant: 'danger'
                 })
             })
     }
-    // let commentCards 
     
 
-    if (!book) {
+    if (!playlist) {
         return <LoadingScreen />
     }
 
@@ -87,34 +86,26 @@ const ShowPlaylist = (props) => {
         <>
             <Container className="fluid">
                 <Card>
-                    <Card.Header>{ book.title }</Card.Header>
-                    <img src={`${book.imageLink}`}/>
+                    <Card.Header>{ playlist.name }</Card.Header>
                     <Card.Body>
-                            <div>Author: { book.author }</div>
-                            <div>description: { book.description }</div>
-                        
+                            <div>Description: { playlist.description }</div> 
                     </Card.Body>
                     <Card.Footer>
-                        <Button onClick={() => setCommentModalShow(true)}
-                            className="m-2" variant="info"
-                        >
-                            Add a comment!
-                        </Button>
                         {
-                            book.owner && user && book.owner._id === user._id 
+                            playlist.owner && user && playlist.owner._id === user._id 
                             ?
                             <>
                                 <Button onClick={() => setEditModalShow(true)} 
                                     className="m-2" 
                                     variant="warning"
                                 >
-                                    Edit Book
+                                    Edit Playlist
                                 </Button>
-                                <Button onClick={() => removeTheBook()}
+                                <Button onClick={() => removeThePlaylist()}
                                     className="m-2"
                                     variant="danger"
                                 >
-                                    delete Book
+                                    Delete Playlist
                                 </Button>
                             </>
                             :
@@ -123,45 +114,17 @@ const ShowPlaylist = (props) => {
                     </Card.Footer>
                 </Card>
             </Container>
-            <Container>
-                { 
-                book.comments.length > 0 
-                ?
-                    book.comments.forEach((comment) => {
-                    console.log('this is our comment in our book from map', comment)
-                    return <ShowComment  
-                        key={comment._id}
-                        comment={comment}
-                        book={book}
-                        user={user}
-                        msgAlert={msgAlert}
-                        // triggerRefresh={() => setUpdated}
-                        />
-                    })   
-                    :
-                    null
-                }
-    
-            </Container>
-            <EditBookModal 
+            <EditPlaylistModal 
                 user={user}
-                book={book} 
+                playlist={playlist} 
                 show={editModalShow} 
-                updateBook={updateBook}
+                updatePlaylist={updatePlaylist}
                 msgAlert={msgAlert}
                 triggerRefresh={() => setUpdated(prev => !prev)}
                 handleClose={() => setEditModalShow(false)} 
             />
-            <NewCommentModal 
-                book={book}
-                show={commentModalShow}
-                user={user}
-                msgAlert={msgAlert}
-                triggerRefresh={() => setUpdated(prev => !prev)}
-                handleClose={() => setCommentModalShow(false)} 
-            /> 
         </>
     )
 }
 
-export default ShowBook
+export default ShowPlaylist

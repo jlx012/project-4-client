@@ -12,8 +12,6 @@ import messages from '../shared/AutoDismissAlert/messages'
 import AddFavorite from '../favorites/AddFavorite'
 import RemoveFavorite from '../favorites/RemoveFavorite'
 
-import './myoosic.css'
-
 
 // style for our card container
 const cardContainerStyle = {
