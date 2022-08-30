@@ -7,6 +7,7 @@ const Home = (props) => {
 
 	return (
 		<>
+	<div className='headerR'></div>
 		<div className="container d-flex justify-content-center">
 			<img src={window.location.origin + '/images/musicpicture.svg'} alt={"logo"} height='500px' width='500px'/>
 			</div>

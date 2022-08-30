@@ -19,7 +19,7 @@ import Playlists from './components/Playlists/Playlists'
 import PlaylistShow from './components/Playlists/PlaylistShow'
 
 
-const App = ({ hideHeaderPaths = [] }) => {
+const App = () => {
 
   const [user, setUser] = useState(null)
   const [favorites, setFavorites] = useState([])
@@ -59,7 +59,7 @@ const App = ({ hideHeaderPaths = [] }) => {
 	}, []);
 
 	const saveToLocalStorage = (items) => {
-		localStorage.setItem('book-favorites', JSON.stringify(items));
+		localStorage.setItem('song-favorites', JSON.stringify(items));
 	};
 
 	const handleFavoriteClick = (song) => {
@@ -75,7 +75,7 @@ const App = ({ hideHeaderPaths = [] }) => {
 				// console.log('favorites id', favorites[i]._id)
 				// console.log('obj id', obj._id)
 				// console.log('user id', user._id)
-				// console.log('book user id', book.userId)
+				// console.log('song user id', song.userId)
 				if(favorites[i].mbid === obj.mbid && user._id === favorites[i].userId) {
 					return status = true
 				}
@@ -98,7 +98,7 @@ const App = ({ hideHeaderPaths = [] }) => {
 			(favorite) => favorite.mbid === song.mbid && favorite.userId === user._id
 		);
 		
-		// console.log('locate book', findBook)
+		// console.log('locate song', findSong)
 		const updateFavoriteList = favorites.filter(
 			(_, i) => i !== findSong
 		)
@@ -111,7 +111,7 @@ const App = ({ hideHeaderPaths = [] }) => {
 				// console.log('favorites id', favorites[i]._id)
 				// console.log('obj id', obj._id)
 				// console.log('user id', user._id)
-				// console.log('book user id', book.userId)
+				// console.log('song user id', song.userId)
 				if(favorites[i]._id === obj._id && user._id === favorites[i].userId) {
 					return status = true
 				}
@@ -125,8 +125,6 @@ const App = ({ hideHeaderPaths = [] }) => {
 		console.log('song user id', song.userId)
 		
 		if (status) {
-			// console.log('current user', user._id)
-			// console.log('book user', book.userId)
 			setFavorites(updateFavoriteList);
 			saveToLocalStorage(updateFavoriteList);
 		}
@@ -136,7 +134,7 @@ const App = ({ hideHeaderPaths = [] }) => {
 			<Fragment>
 				<Header user={user} />
 				<Routes>
-					{window.location.pathname !== "/" ? <Header user={user} /> : null}{" "}
+					{/* {window.location.pathname == "/" ? <Header /> : null} */}
 					<Route path='/' element={<Home msgAlert={msgAlert} user={user} />} />
 					<Route
 						path='/sign-up'
