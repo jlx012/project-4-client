@@ -9,10 +9,13 @@ const PlaylistForm = (props) => {
     const { playlist, handleChange, heading, handleSubmit } = props
 
     return (
-        <Container className="justify-content-center">
-            <h3>{heading}</h3>
+        <>
+        <h3 className='text-center text-dark py-5'>{heading}</h3>
+        <Container className="justify-content-center py-5 bg-dark" style={
+            { opacity: '90%',}
+         } >
             <Form onSubmit={handleSubmit}>
-                <Form.Label htmlFor="title">Name</Form.Label>
+                <Form.Label htmlFor="title"  className='mt-3 text-light'>Name</Form.Label>
                 <Form.Control
                     placeholder="What is this playlists name?"
                     name="name"
@@ -20,7 +23,7 @@ const PlaylistForm = (props) => {
                     value={ playlist.name }
                     onChange={ handleChange }
                 />
-                <Form.Label htmlFor="description">Description</Form.Label>
+                <Form.Label htmlFor="description" className='mt-3 text-light'>Description</Form.Label>
                 <Form.Control
                     placeholder="Give a brief description of the playlist?"
                     type="text"
@@ -29,9 +32,10 @@ const PlaylistForm = (props) => {
                     value={ playlist.description }
                     onChange={ handleChange }
                 />
-                <Button type="submit">Submit</Button>
+                <Button className='mt-3' variant={'light'} type="submit">Submit</Button>
             </Form>
         </Container>
+        </>
     )
 }
 

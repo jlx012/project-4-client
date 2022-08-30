@@ -53,7 +53,7 @@ const PlaylistsIndex = (props) => {
     const playlistsCards = playlists.map((playlist) => {
         // if (playlist.userId === user._id) {
             return (
-            <Card style={{ width: '80%', height: '150px', margin: 5}} key={ playlist._id }>
+            <Card style={{ width: '80%', height: '150px', margin: 5, opacity: '90%'}} key={ playlist._id }>
                 <Card.Body className='text-center'>
                     <Card.Title >
                         <Link to={`/playlists/${playlist._id}`}>{ playlist.name }</Link>

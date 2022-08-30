@@ -20,7 +20,7 @@ const cardContainerStyle = {
     overflowX: 'scroll',
     display: 'flex',
     margin: 'auto',
-    border: '2px solid black',
+    border: '3px solid white',
     marginTop: '20px',
 }
 
@@ -105,24 +105,24 @@ const MyoosicIndex = (props) => {
         return (
         <Card style={{ width: '300px', margin: '15px',display: 'inline-block' , minWidth: '250px'}} key={ song._id }>
             <Card.Header>
-                <h1>{ song.name }</h1>
+                <h3 className='text-center'>{ song.name }</h3>
             </Card.Header>
             <Card.Body>
-                <Card.Title>
+                <Card.Title className='text-center'>
                     { song.artist.name }
                 </Card.Title>
                 <ListGroup className="list-group-flush">
-                    <ListGroup.Item>Duration: { song.duration }</ListGroup.Item>
-                    <ListGroup.Item>Playcount: { song.playcount }</ListGroup.Item>
-                    <ListGroup.Item>Listeners: { song.listeners }</ListGroup.Item>
+                    <ListGroup.Item className='text-center'>Duration: { song.duration }</ListGroup.Item>
+                    <ListGroup.Item className='text-center'>Playcount: { song.playcount }</ListGroup.Item>
+                    <ListGroup.Item className='text-center'>Listeners: { song.listeners }</ListGroup.Item>
                 </ListGroup>
                 { addRemoveFavorite(song)
                     ?  
-                    <div onClick={() => props.handleRemoveClick(song)} className='controls'>
+                    <div onClick={() => props.handleRemoveClick(song)} className='controls text-center mx-auto'>
                         <RemoveFavorite /> 
                     </div>  
                     :     
-                    <div onClick={() => props.handleFavoriteClick(song)} className='controls'>
+                    <div onClick={() => props.handleFavoriteClick(song)} className='controls text-center mx-auto'>
                         <AddFavorite />
                     </div>        
                 }
@@ -135,12 +135,12 @@ const MyoosicIndex = (props) => {
         
         return (<Card style={{ width: '300px', margin: '15px',display: 'inline-block' , minWidth: '250px'}} key={ artist._id }>
             <Card.Header>
-                <h1>{ artist.name }</h1>
+                <h3 className='text-center'>{ artist.name }</h3>
             </Card.Header>
             <Card.Body>
                 <ListGroup className="list-group-flush">
-                    <ListGroup.Item>Playcount: { artist.playcount }</ListGroup.Item>
-                    <ListGroup.Item>Listeners: { artist.listeners }</ListGroup.Item>
+                    <ListGroup.Item className='text-center'>Playcount: { artist.playcount }</ListGroup.Item>
+                    <ListGroup.Item className='text-center'>Listeners: { artist.listeners }</ListGroup.Item>
                 </ListGroup>
             </Card.Body>
         </Card>)
@@ -148,11 +148,11 @@ const MyoosicIndex = (props) => {
 
     return (
         <>
-            <h1 className='text-center'>Top Songs Chart</h1>
+            <h1 className='text-center text-light mt-3'>Top Songs Chart</h1>
             <div style={cardContainerStyle}>
                 {songCards}
             </div>
-            <h1 className='text-center' marginTop="50px">Top Artists Chart</h1>
+            <h1 className='text-center text-light mt-3' marginTop="50px">Top Artists Chart</h1>
             <div style={cardContainerStyle}>
                 {artistCards}
             </div>

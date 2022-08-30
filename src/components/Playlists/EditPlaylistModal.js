@@ -66,6 +66,7 @@ const EditPlaylistModal = (props) => {
                     handleChange={handleChange}
                     handleSubmit={handleSubmit}
                     heading="Update Playlist"
+                    className='text-dark'
                 />
             </Modal.Body>
         </Modal>

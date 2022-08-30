@@ -5,11 +5,18 @@ const Home = (props) => {
 	// const { msgAlert, user } = props
 	console.log('props in home', props)
 
+	let headeR = {
+		backgroundImage: 'url("/images/marcela-laskoski-YrtFlrLo2DQ-unsplash.jpg")',
+		backgroundRepeat: 'no-repeat',
+		backgroundPosition: 'center',
+		backgroundSize: 'cover',
+	}
+
 	return (
 		<>
-	<div className='headerR'></div>
+	<div className='headerR' style={headeR}></div>
 		<div className="container d-flex justify-content-center">
-			<img src={window.location.origin + '/images/musicpicture.svg'} alt={"logo"} height='500px' width='500px'/>
+			<img className=' rounded-circle mt-5' src={window.location.origin + '/images/musicpicture.svg'} alt={"logo"} height='400px' width='400px'/>
 			</div>
 			<div className='row m-auto d-flex'>
 				<div className='col-sm-10 col-md-8 mx-auto d-flex justify-content-center mt-5'>

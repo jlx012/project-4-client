@@ -6,6 +6,14 @@ export const getAllMusic = () => {
     return axios(`${apiUrl}/myoosic`)
 }
 
+export const getOneSong = (id) => {
+    return axios(`${apiUrl}/myoosic/song/${id}`)
+}
+
+export const getOneArtist = (id) => {
+    return axios(`${apiUrl}/myoosic/artist/${id}`)
+}
+
 export const getAllPlaylists = () => {
     return axios(`${apiUrl}/playlists`)
 }

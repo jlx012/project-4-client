@@ -84,8 +84,10 @@ const ShowPlaylist = (props) => {
 
     return (
         <>
-            <Container className="fluid">
-                <Card>
+            <Container className="fluid mt-5 ">
+                <Card style={
+                    { opacity: '90%',}
+                }>
                     <Card.Header>{ playlist.name }</Card.Header>
                     <Card.Body>
                             <div>Description: { playlist.description }</div> 
@@ -97,7 +99,7 @@ const ShowPlaylist = (props) => {
                             <>
                                 <Button onClick={() => setEditModalShow(true)} 
                                     className="m-2" 
-                                    variant="warning"
+                                    variant="dark"
                                 >
                                     Edit Playlist
                                 </Button>
