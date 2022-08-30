@@ -14,6 +14,11 @@ const authenticatedOptions = (
 			</Link>
 		</Nav.Item>
 		<Nav.Item className='m-2'>
+			<Link to="/playlists" style={ linkStyle }>
+				My Playlists
+			</Link>
+		</Nav.Item>
+		<Nav.Item className='m-2'>
 			<Link to="/favorites" style={ linkStyle }>
 				Favorite Songs
 			</Link>

@@ -11,6 +11,10 @@ export const getAllPlaylists = () => {
 }
 
 export const createPlaylist = (user, newPlaylist) => {
+    console.log('createplaylist in api was hit')
+
+    console.log('this is user', user)
+    console.log('this is newPlaylist', newPlaylist)
     return axios({
         url: apiUrl + 'create-playist',
         method: 'POST',

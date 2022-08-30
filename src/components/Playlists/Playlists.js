@@ -42,7 +42,7 @@ const PlaylistsIndex = (props) => {
         return <p>Error!</p>
     }
 
-    // If books haven't been loaded yet, show a loading message
+    // If playlists haven't been loaded yet, show a loading message
     if (!playlists) {
         return <LoadingScreen />
     } else if (playlists.length === 0) {
@@ -52,12 +52,11 @@ const PlaylistsIndex = (props) => {
 
     const playlistsCards = playlists.map((playlist) => {
     
-        return (<Card style={{ width: '30%', margin: 5}} key={ playlist._id }>
-            <Card.Header>
-                <Link to={`/playlists/${playlist._id}`}>{ playlist.name }</Link>
-            </Card.Header>
-            <Card.Body>
-                <p>{ playlist.description }</p>
+        return (
+        <Card style={{ width: '80%', height: '150px', margin: 5}} key={ playlist._id }>
+            <Card.Body className='text-center'>
+                <Card.Title ><Link to={`/playlists/${playlist._id}`}>{ playlist.name }</Link></Card.Title>
+                <Card.Text display="flex-right">{ playlist.description }</Card.Text>
             </Card.Body>
         </Card>)
 })

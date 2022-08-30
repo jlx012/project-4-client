@@ -47,7 +47,7 @@ const CreatePlaylist = (props) => {
             playlist={ playlist } 
             handleChange={ handleChange } 
             handleSubmit={ handleSubmit }
-            heading="Add a new playlist!"
+            heading="Create a new playlist!"
         />
     )
 }

@@ -178,11 +178,9 @@ const App = () => {
 					<Route
 						path='/playlists'
 						element={
-							<RequireAuth user={user}>
-								<Playlists 
-									msgAlert={msgAlert} clearUser={clearUser} user={user} 
-								/>
-							</RequireAuth>
+							<Playlists 
+								msgAlert={msgAlert} clearUser={clearUser} user={user} 
+							/>
 						}
 					/>
 				</Routes>

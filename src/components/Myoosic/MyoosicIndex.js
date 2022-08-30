@@ -4,6 +4,7 @@ import {
 } from 'react'
 import Card from 'react-bootstrap/Card'
 import { Link } from 'react-router-dom'
+import ListGroup from 'react-bootstrap/ListGroup';
 
 import LoadingScreen from '../shared/LoadingScreen'
 import { getAllMusic } from '../../api/myoosic'
@@ -19,10 +20,10 @@ const cardContainerStyle = {
     maxWidth: '80vw',
     maxHieght: '30vh',
     overflowX: 'scroll',
-display: 'flex',
-margin: 'auto',
-border: '2px solid black',
-marginTop: '20px',
+    display: 'flex',
+    margin: 'auto',
+    border: '2px solid black',
+    marginTop: '20px',
 }
 
 const MyoosicIndex = (props) => {
@@ -109,7 +110,14 @@ const MyoosicIndex = (props) => {
                 <h1>{ song.name }</h1>
             </Card.Header>
             <Card.Body>
-
+                <Card.Title>
+                    { song.artist.name }
+                </Card.Title>
+                <ListGroup className="list-group-flush">
+                    <ListGroup.Item>Duration: { song.duration }</ListGroup.Item>
+                    <ListGroup.Item>Playcount: { song.playcount }</ListGroup.Item>
+                    <ListGroup.Item>Listeners: { song.listeners }</ListGroup.Item>
+                </ListGroup>
                 { addRemoveFavorite(song)
                     ?  
                     <div onClick={() => props.handleRemoveClick(song)} className='controls'>
@@ -132,7 +140,10 @@ const MyoosicIndex = (props) => {
                 <h1>{ artist.name }</h1>
             </Card.Header>
             <Card.Body>
-
+                <ListGroup className="list-group-flush">
+                    <ListGroup.Item>Playcount: { artist.playcount }</ListGroup.Item>
+                    <ListGroup.Item>Listeners: { artist.listeners }</ListGroup.Item>
+                </ListGroup>
             </Card.Body>
         </Card>)
     })
@@ -143,7 +154,7 @@ const MyoosicIndex = (props) => {
             <div style={cardContainerStyle}>
                 {songCards}
             </div>
-            <h1 className='text-center'>Top Artists Chart</h1>
+            <h1 className='text-center' marginTop="50px">Top Artists Chart</h1>
             <div style={cardContainerStyle}>
                 {artistCards}
             </div>
