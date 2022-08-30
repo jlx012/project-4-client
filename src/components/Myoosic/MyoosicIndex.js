@@ -1,4 +1,4 @@
-import {
+import React, {
     useState,
     useEffect
 } from 'react'
@@ -7,11 +7,17 @@ import { Link } from 'react-router-dom'
 import ListGroup from 'react-bootstrap/ListGroup';
 
 import LoadingScreen from '../shared/LoadingScreen'
-import { getAllMusic } from '../../api/myoosic'
+import { getAllMusic, getAllPlaylists, addSongToPlaylist } from '../../api/myoosic'
 import messages from '../shared/AutoDismissAlert/messages'
 import AddFavorite from '../favorites/AddFavorite'
 import RemoveFavorite from '../favorites/RemoveFavorite'
 
+import { Button, CircularProgress } from "@mui/material"
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
+import Modal from '@mui/material/Modal';
+import { IoIosAddCircle } from "react-icons/io"
+import { TiTick } from "react-icons/ti"
 
 // style for our card container
 const cardContainerStyle = {
@@ -24,6 +30,20 @@ const cardContainerStyle = {
     marginTop: '20px',
 }
 
+// Modal Style:
+const style = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 600,
+    height: 400,
+    bgcolor: 'background.paper',
+    border: '2px solid #000',
+    boxShadow: 24,
+    p: 4,
+};
+
 const MyoosicIndex = (props) => {
     const [tracks, setTracks] = useState(null)
     const [artists, setArtists] = useState(null)
@@ -32,6 +52,19 @@ const MyoosicIndex = (props) => {
     const { favorites } = props
     const { user } = props
 
+    const [open, setOpen] = React.useState(false);
+    const [selectedSong, setSelectedSong] = useState(null)
+    const [playlist, setPlaylist] = useState(null)
+
+    const handleOpen = (song) => {
+        setSelectedSong(song)
+        setOpen(true);
+
+    }
+    const handleClose = () => {
+        setOpen(false);
+        setSelectedSong(null)
+    }
 
     useEffect(() => {
         getAllMusic()
@@ -66,6 +99,30 @@ const MyoosicIndex = (props) => {
             })
     }, [])
 
+    const fetchingPlaylists = () => {
+        getAllPlaylists()
+            .then(res => {
+                setPlaylist(res.data.playlists)
+                console.log(res.data.playlists)
+            })
+            .catch(err => {
+                msgAlert({
+                    heading: 'Error Getting Playlist',
+                    message: messages.getPlaylistFailure,
+                    variant: 'danger',
+                })
+                setError(true)
+            })
+    }
+
+    useEffect(() => {
+        if (open) {
+            fetchingPlaylists()
+        } else {
+            setPlaylist(null)
+        }
+    }, [open])
+
     if (error) {
         return <p>Error!</p>
     }
@@ -84,14 +141,23 @@ const MyoosicIndex = (props) => {
         return <p>No Artists yet. Better add some.</p>
     }
 
+    const addToPlay = (play) => {
+        addSongToPlaylist(play._id, selectedSong)
+            .then(succ => {
+                fetchingPlaylists()
+            }).catch(err => {
+                msgAlert({
+                    heading: 'Error Adding Song To Playlist',
+                    message: messages.getPlaylistFailure,
+                    variant: 'danger',
+                })
+            })
+    }
 
     const addRemoveFavorite = (song) => {
-        // console.log('book',  book)
+
         for (let i = 0; i < favorites.length; i++) {
-            // console.log('list id', favorites[i]._id)
-            // console.log('book id', book._id)
-            // console.log('user id', user._id)
-            // console.log('book user id', favorites[i].userId)
+
             if (favorites[i]._id === song._id && user._id === favorites[i].userId) {
                 return true
             }
@@ -126,6 +192,7 @@ const MyoosicIndex = (props) => {
                             <AddFavorite />
                         </div>
                     }
+                    <Button className='j_btn' onClick={() => handleOpen(song)}> Add to Playlist </Button>
                 </Card.Body>
             </Card>)
     })
@@ -164,6 +231,62 @@ const MyoosicIndex = (props) => {
             <div style={cardContainerStyle}>
                 {artistCards}
             </div>
+            <Modal
+                open={open}
+                onClose={handleClose}
+                aria-labelledby="modal-modal-title"
+                aria-describedby="modal-modal-description"
+            >
+                <Box sx={style}>
+                    <Typography id="modal-modal-title" variant="h5" component="h2">
+                        PlayLists List
+                    </Typography>
+                    <div className='modal_container'>
+                        {
+                            playlist ?
+                                playlist.length >= 1 ?
+                                    playlist.map((play, index) => {
+                                        return (
+                                            <>
+                                                <div className='playlist_box'>
+                                                    <div className='name_box'>
+                                                        <div className='num'> No. {index + 1} </div>
+                                                        <div className='name'> {play?.name} </div>
+                                                    </div>
+                                                    <div className='action_box'>
+                                                        {
+                                                            play.playlistData.find((e) => e.name == selectedSong?.name) ?
+                                                                <>
+                                                                   <Button> <span style={{ color: "green" , fontSize:"1rem" }}> <TiTick /> </span> </Button> 
+                                                                </>
+                                                                :
+                                                                <>
+                                                                    <Button onClick={() => addToPlay(play)}> <IoIosAddCircle fontSize="1rem" /> </Button>
+                                                                </>
+                                                        }
+                                                    </div>
+                                                </div>
+                                            </>
+                                        )
+                                    })
+                                    :
+                                    <>
+                                        <div className='progress_box'>
+                                            <Typography id="modal-modal-title" color="red" variant="h6" component="h2">
+                                                No Playlist Found
+                                            </Typography>
+                                        </div>
+                                    </>
+                                :
+                                <>
+                                    <div className='progress_box'>
+                                        <CircularProgress />
+                                    </div>
+                                </>
+                        }
+                    </div>
+                </Box>
+            </Modal>
         </>
 
     )

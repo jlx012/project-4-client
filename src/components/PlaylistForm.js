@@ -10,7 +10,7 @@ const PlaylistForm = (props) => {
 
     return (
         <>
-        <h3 className='text-center text-dark py-5'>{heading}</h3>
+        <h3 className='text-center text-light py-5'>{heading}</h3>
         <Container className="justify-content-center py-5 bg-dark" style={
             { opacity: '90%',}
          } >

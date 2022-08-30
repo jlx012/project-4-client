@@ -5,18 +5,23 @@ import { useParams, useNavigate } from 'react-router-dom'
 // useNavigate will allow us to navigate to a specific page
 
 import { Container, Card, Button } from 'react-bootstrap'
+import ListGroup from 'react-bootstrap/ListGroup';
 
 import LoadingScreen from '../shared/LoadingScreen'
-import { getOnePlaylist, updatePlaylist, removePlaylist } from '../../api/myoosic'
+import { getOnePlaylist, updatePlaylist, removePlaylist, removeSongToPlaylist } from '../../api/myoosic'
 import messages from '../shared/AutoDismissAlert/messages'
 import EditPlaylistModal from './EditPlaylistModal'
 
 
-// we'll use a style object to lay out the Comment cards
-const cardContainerLayout = {
+// style for our card container
+const cardContainerStyle = {
+    maxWidth: '80vw',
+    maxHieght: '30vh',
+    overflowX: 'scroll',
     display: 'flex',
-    justifyContent: 'center',
-    flexFlow: 'row wrap'
+    margin: 'auto',
+    border: '3px solid white',
+    marginTop: '20px',
 }
 
 const ShowPlaylist = (props) => {
@@ -76,11 +81,51 @@ const ShowPlaylist = (props) => {
                 })
             })
     }
+
+    const removeSong = (song) => {
+        removeSongToPlaylist(playlist._id, song)
+            .then(() => {
+                msgAlert({
+                    heading: 'Success',
+                    message: messages.removePlaylistSuccess,
+                    variant: 'success'
+                })
+
+            })
+            .catch(err => {
+                msgAlert({
+                    heading: 'Error removing Song',
+                    message: messages.removePlaylistFailure,
+                    variant: 'danger'
+                })
+            })
+    }
     
 
     if (!playlist) {
         return <LoadingScreen />
     }
+
+    const songCards = playlist.playlistData.map((song) => {
+
+        return (
+            <Card style={{ width: '300px', margin: '15px', display: 'inline-block', minWidth: '250px' }} key={song._id}>
+                <Card.Header>
+                    <h3 className='text-center'>{song.name}</h3>
+                </Card.Header>
+                <Card.Body>
+                    <Card.Title className='text-center'>
+                        {song.artist.name}
+                    </Card.Title>
+                    <ListGroup className="list-group-flush">
+                        <ListGroup.Item className='text-center'>Duration: {song.duration}</ListGroup.Item>
+                        <ListGroup.Item className='text-center'>Playcount: {song.playcount}</ListGroup.Item>
+                        <ListGroup.Item className='text-center'>Listeners: {song.listeners}</ListGroup.Item>
+                    </ListGroup>
+                    <Button onClick={() => removeSong(song)} >Remove Song From Playlist</Button>
+                </Card.Body>
+            </Card>)
+    })
 
     return (
         <>
@@ -115,7 +160,11 @@ const ShowPlaylist = (props) => {
                         }
                     </Card.Footer>
                 </Card>
+                <div style={cardContainerStyle}>
+                    {songCards}
+                </div>
             </Container>
+
             <EditPlaylistModal 
                 user={user}
                 playlist={playlist} 

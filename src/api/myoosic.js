@@ -67,4 +67,29 @@ export const updatePlaylist = (user, updatedPlaylist) => {
 		},
 		data: { playlist: updatedPlaylist }
 	})
+    
+    
+}
+
+// Adding Song To Playlist
+export const addSongToPlaylist = (playlist, song) => {
+    return axios({
+        url: apiUrl + '/add-to-playlist',
+        method: 'POST',
+        // headers: {
+        //     Authorization: `Token token=${user.token}`,
+        // },
+        data: { playlistID: playlist, song }
+    })
+}
+// Remove Song To Playlist
+export const removeSongToPlaylist = (playlist, song) => {
+    return axios({
+        url: apiUrl + '/remove-from-playlist',
+        method: 'POST',
+        // headers: {
+        //     Authorization: `Token token=${user.token}`,
+        // },
+        data: { playlistID: playlist, song }
+    })
 }
