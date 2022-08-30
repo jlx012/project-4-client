@@ -1,6 +1,6 @@
-import { 
-    useState, 
-    useEffect 
+import {
+    useState,
+    useEffect
 } from 'react'
 import Card from 'react-bootstrap/Card'
 import { Link } from 'react-router-dom'
@@ -31,7 +31,7 @@ const MyoosicIndex = (props) => {
     const { msgAlert, triggerRefresh } = props
     const { favorites } = props
     const { user } = props
-    
+
 
     useEffect(() => {
         getAllMusic()
@@ -87,12 +87,12 @@ const MyoosicIndex = (props) => {
 
     const addRemoveFavorite = (song) => {
         // console.log('book',  book)
-        for (let i = 0; i<favorites.length; i++) {
+        for (let i = 0; i < favorites.length; i++) {
             // console.log('list id', favorites[i]._id)
             // console.log('book id', book._id)
             // console.log('user id', user._id)
             // console.log('book user id', favorites[i].userId)
-            if(favorites[i]._id === song._id && user._id === favorites[i].userId) {
+            if (favorites[i]._id === song._id && user._id === favorites[i].userId) {
                 return true
             }
         }
@@ -101,46 +101,46 @@ const MyoosicIndex = (props) => {
 
 
     const songCards = tracks.map((song) => {
-    
+
         return (
-        <Card style={{ width: '300px', margin: '15px',display: 'inline-block' , minWidth: '250px'}} key={ song._id }>
-            <Card.Header>
-                <h3 className='text-center'>{ song.name }</h3>
-            </Card.Header>
-            <Card.Body>
-                <Card.Title className='text-center'>
-                    { song.artist.name }
-                </Card.Title>
-                <ListGroup className="list-group-flush">
-                    <ListGroup.Item className='text-center'>Duration: { song.duration }</ListGroup.Item>
-                    <ListGroup.Item className='text-center'>Playcount: { song.playcount }</ListGroup.Item>
-                    <ListGroup.Item className='text-center'>Listeners: { song.listeners }</ListGroup.Item>
-                </ListGroup>
-                { addRemoveFavorite(song)
-                    ?  
-                    <div onClick={() => props.handleRemoveClick(song)} className='controls text-center mx-auto'>
-                        <RemoveFavorite /> 
-                    </div>  
-                    :     
-                    <div onClick={() => props.handleFavoriteClick(song)} className='controls text-center mx-auto'>
-                        <AddFavorite />
-                    </div>        
-                }
-            </Card.Body>
-        </Card>)
+            <Card style={{ width: '300px', margin: '15px', display: 'inline-block', minWidth: '250px' }} key={song._id}>
+                <Card.Header>
+                    <h3 className='text-center'>{song.name}</h3>
+                </Card.Header>
+                <Card.Body>
+                    <Card.Title className='text-center'>
+                        {song.artist.name}
+                    </Card.Title>
+                    <ListGroup className="list-group-flush">
+                        <ListGroup.Item className='text-center'>Duration: {song.duration}</ListGroup.Item>
+                        <ListGroup.Item className='text-center'>Playcount: {song.playcount}</ListGroup.Item>
+                        <ListGroup.Item className='text-center'>Listeners: {song.listeners}</ListGroup.Item>
+                    </ListGroup>
+                    {addRemoveFavorite(song)
+                        ?
+                        <div onClick={() => props.handleRemoveClick(song)} className='controls text-center mx-auto'>
+                            <RemoveFavorite />
+                        </div>
+                        :
+                        <div onClick={() => props.handleFavoriteClick(song)} className='controls text-center mx-auto'>
+                            <AddFavorite />
+                        </div>
+                    }
+                </Card.Body>
+            </Card>)
     })
 
 
     const artistCards = artists.map((artist) => {
-        
-        return (<Card style={{ width: '300px', margin: '15px',display: 'inline-block' , minWidth: '250px'}} key={ artist._id }>
+
+        return (<Card style={{ width: '300px', margin: '15px', display: 'inline-block', minWidth: '250px' }} key={artist._id}>
             <Card.Header>
-                <h3 className='text-center'>{ artist.name }</h3>
+                <h3 className='text-center'>{artist.name}</h3>
             </Card.Header>
             <Card.Body>
                 <ListGroup className="list-group-flush">
-                    <ListGroup.Item className='text-center'>Playcount: { artist.playcount }</ListGroup.Item>
-                    <ListGroup.Item className='text-center'>Listeners: { artist.listeners }</ListGroup.Item>
+                    <ListGroup.Item className='text-center'>Playcount: {artist.playcount}</ListGroup.Item>
+                    <ListGroup.Item className='text-center'>Listeners: {artist.listeners}</ListGroup.Item>
                 </ListGroup>
             </Card.Body>
         </Card>)
@@ -148,6 +148,14 @@ const MyoosicIndex = (props) => {
 
     return (
         <>
+
+            <div className="container p-8 mt-5 mb-5">
+                <div className="d-flex">
+                    <input class="form-control" type="text" placeholder="Enter Song, Artist name" aria-label="default input example" />
+                    <button className="btn bg-dark text-light">Search</button>
+                </div>
+            </div>
+
             <h1 className='text-center text-light mt-3'>Top Songs Chart</h1>
             <div style={cardContainerStyle}>
                 {songCards}
@@ -157,7 +165,7 @@ const MyoosicIndex = (props) => {
                 {artistCards}
             </div>
         </>
-        
+
     )
 }
 
